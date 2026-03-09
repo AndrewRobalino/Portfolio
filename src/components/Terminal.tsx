@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import TerminalTitleBar from "./TerminalTitleBar";
+import AboutContent from "./terminal-content/AboutContent";
 import {
   useTerminalSequence,
   type TerminalLine,
@@ -102,7 +103,12 @@ export default function Terminal() {
         )}
 
         {/* Section content area */}
-        {activeSection !== "intro" && (
+        {activeSection === "about" && (
+          <div className="mt-6" key={activeSection}>
+            <AboutContent />
+          </div>
+        )}
+        {activeSection !== "intro" && activeSection !== "about" && (
           <div className="mt-6">
             <p className="leading-relaxed">
               <span className="text-terminal-green">
