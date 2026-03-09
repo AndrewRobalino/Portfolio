@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import TerminalTitleBar from "./TerminalTitleBar";
 import AboutContent from "./terminal-content/AboutContent";
@@ -36,11 +36,39 @@ const introLines: TerminalLine[] = [
   { text: "Hi, I'm Andrew Robalino Garcia", delay: 300, speed: 30 },
 ];
 
-export default function Terminal() {
+interface TerminalProps {
+  onSlashTrigger?: () => void;
+}
+
+export default function Terminal({ onSlashTrigger }: TerminalProps) {
   const [activeSection, setActiveSection] = useState<Section>("intro");
+  const terminalBodyRef = useRef<HTMLDivElement>(null);
 
   const { displayedLines, isComplete } = useTerminalSequence(introLines);
-  const { currentWord } = useRotatingWord(IDENTITY_WORDS);
+  const { currentWord, currentIndex } = useRotatingWord(IDENTITY_WORDS);
+
+  // Track whether we've seen the first index to avoid triggering on mount
+  const hasInitialized = useRef(false);
+
+  useEffect(() => {
+    if (!isComplete) return;
+
+    // Skip the very first render after intro completes
+    if (!hasInitialized.current) {
+      hasInitialized.current = true;
+      return;
+    }
+
+    onSlashTrigger?.();
+  }, [currentIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Auto-scroll terminal body to bottom when content changes
+  useEffect(() => {
+    const el = terminalBodyRef.current;
+    if (el) {
+      el.scrollTop = el.scrollHeight;
+    }
+  });
 
   const showRotatingWord = isComplete;
   const showNav = isComplete;
@@ -49,7 +77,7 @@ export default function Terminal() {
   return (
     <div className="flex flex-col h-full border border-white/10 overflow-hidden">
       <TerminalTitleBar />
-      <div className="flex-1 bg-matte-black p-6 font-mono text-sm overflow-y-auto terminal-scrollbar">
+      <div ref={terminalBodyRef} className="flex-1 bg-matte-black p-6 font-mono text-sm overflow-y-auto terminal-scrollbar">
         {/* Intro sequence lines */}
         {displayedLines.map((line, i) => (
           <p key={i} className="leading-relaxed">

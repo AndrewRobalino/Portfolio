@@ -13,9 +13,31 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Andrew Robalino Garcia | Portfolio",
+  metadataBase: new URL("https://andrewrobalino.dev"),
+  title: "Andrew Robalino Garcia | Developer Portfolio",
   description:
-    "Developer portfolio for Andrew Robalino Garcia — CS student at FIU, frontend-focused full-stack developer.",
+    "CS student at FIU building real-world applications. Frontend-focused full-stack developer with a passion for design, problem solving, and clean architecture.",
+  openGraph: {
+    title: "Andrew Robalino Garcia | Developer Portfolio",
+    description:
+      "CS student at FIU building real-world applications. Frontend-focused full-stack developer with a passion for design, problem solving, and clean architecture.",
+    url: "https://andrewrobalino.dev",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Andrew Robalino Garcia — Developer Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Andrew Robalino Garcia | Developer Portfolio",
+    description:
+      "CS student at FIU building real-world applications. Frontend-focused full-stack developer with a passion for design, problem solving, and clean architecture.",
+  },
 };
 
 export default function RootLayout({
