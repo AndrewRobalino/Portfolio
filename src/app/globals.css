@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-matte-black: #0a0a0a;
+  --color-terminal-green: #4ade80;
+  --color-slash-red: #ef4444;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+}
+
+html,
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  color: #ffffff;
+}
