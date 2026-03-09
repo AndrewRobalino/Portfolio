@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import PhotoPanels from "@/components/PhotoPanels";
 import Terminal from "@/components/Terminal";
 
 export default function Home() {
@@ -9,8 +10,8 @@ export default function Home() {
         <div className="flex w-[60%] flex-col p-6">
           <Terminal />
         </div>
-        <div className="flex w-[40%] flex-col items-center justify-center p-8">
-          <p className="font-mono text-white/40">Photo panels go here</p>
+        <div className="w-[40%] p-4">
+          <PhotoPanels />
         </div>
       </div>
     </>
