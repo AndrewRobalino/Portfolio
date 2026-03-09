@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import TerminalTitleBar from "./TerminalTitleBar";
 import AboutContent from "./terminal-content/AboutContent";
 import ProjectsContent from "./terminal-content/ProjectsContent";
+import ResumeContent from "./terminal-content/ResumeContent";
+import ContactContent from "./terminal-content/ContactContent";
 import {
   useTerminalSequence,
   type TerminalLine,
@@ -43,15 +45,6 @@ export default function Terminal() {
   const showRotatingWord = isComplete;
   const showNav = isComplete;
 
-  const sectionPlaceholders: Record<Exclude<Section, "intro">, string> = useMemo(
-    () => ({
-      about: "$ Loading about_me...",
-      projects: "$ Loading projects...",
-      resume: "$ Loading resume...",
-      contact: "$ Loading contact...",
-    }),
-    []
-  );
 
   return (
     <div className="flex flex-col h-full border border-white/10 overflow-hidden">
@@ -114,14 +107,14 @@ export default function Terminal() {
             <ProjectsContent />
           </div>
         )}
-        {(activeSection === "resume" || activeSection === "contact") && (
-          <div className="mt-6">
-            <p className="leading-relaxed">
-              <span className="text-terminal-green">
-                {sectionPlaceholders[activeSection]}
-              </span>
-              <span className="terminal-cursor">|</span>
-            </p>
+        {activeSection === "resume" && (
+          <div className="mt-6" key="resume">
+            <ResumeContent />
+          </div>
+        )}
+        {activeSection === "contact" && (
+          <div className="mt-6" key="contact">
+            <ContactContent />
           </div>
         )}
       </div>
