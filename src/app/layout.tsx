@@ -23,17 +23,9 @@ export const metadata: Metadata = {
       "CS student at FIU building real-world applications. Frontend-focused full-stack developer with a passion for design, problem solving, and clean architecture.",
     url: "https://andrewrobalino.dev",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Andrew Robalino Garcia — Developer Portfolio",
-      },
-    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Andrew Robalino Garcia | Developer Portfolio",
     description:
       "CS student at FIU building real-world applications. Frontend-focused full-stack developer with a passion for design, problem solving, and clean architecture.",

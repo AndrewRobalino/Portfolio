@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
+import Image from "next/image";
 import {
   useTerminalSequence,
   type TerminalLine,
 } from "@/hooks/useTerminalSequence";
 import { projects } from "@/data/projects";
+import EightPuzzleDemo from "./demos/EightPuzzleDemo";
+import RestaurantDemo from "./demos/RestaurantDemo";
+import FuelLogDemo from "./demos/FuelLogDemo";
 
 const ERROR_LINES = [
   "ERROR: STACK OVERFLOW at 0x7fff2a3b",
@@ -47,7 +51,6 @@ function EasterEggContent() {
   const [phase, setPhase] = useState<"errors" | "wait" | "reveal" | "done">("errors");
   const errorIndexRef = useRef(0);
 
-  // Rapid-fire error lines
   useEffect(() => {
     if (phase !== "errors") return;
 
@@ -71,7 +74,6 @@ function EasterEggContent() {
     phase === "wait" || phase === "reveal" || phase === "done"
   );
 
-  // Transition to reveal after wait finishes + pause
   useEffect(() => {
     if (waitDone && phase === "wait") {
       const timer = setTimeout(() => setPhase("reveal"), 500);
@@ -107,7 +109,7 @@ function EasterEggContent() {
       ))}
 
       {(phase === "wait" || phase === "reveal" || phase === "done") && (
-        <p className="leading-relaxed mt-2">
+        <p className="leading-relaxed mt-3">
           <span className="text-white">{waitText}</span>
           {phase === "wait" && showCursor && (
             <span className="terminal-cursor">|</span>
@@ -127,14 +129,91 @@ function EasterEggContent() {
   );
 }
 
+function PlaceholderContent() {
+  const lines: TerminalLine[] = useMemo(() => [
+    { text: "ls projects/upcoming/", isCommand: true, speed: 40 },
+    { text: "more to come...", delay: 400, speed: 60 },
+  ], []);
+
+  const { displayedLines } = useTerminalSequence(lines);
+
+  return (
+    <div>
+      {displayedLines.map((line, i) => (
+        <p key={i} className="leading-relaxed">
+          {line.isCommand && (
+            <span className="text-terminal-green">$ </span>
+          )}
+          <span className={i === 1 ? "text-white/40" : "text-white"}>
+            {line.text}
+          </span>
+          {line.isTyping && <span className="terminal-cursor">|</span>}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+const DEMO_MAP: Record<string, React.ComponentType> = {
+  "8-puzzle": EightPuzzleDemo,
+  "restaurant-manager": RestaurantDemo,
+  "fuel-log": FuelLogDemo,
+};
+
+function DemoProjectContent({ projectIndex }: { projectIndex: number }) {
+  const project = projects[projectIndex];
+
+  const lines: TerminalLine[] = useMemo(() => [
+    { text: `run projects/${project.slug}/demo`, isCommand: true, speed: 40 },
+    { text: `${project.name}  ${project.tag}`, delay: 300, speed: 30 },
+    { text: project.summary, delay: 200, speed: 15 },
+  ], [project.slug, project.name, project.tag, project.summary]);
+
+  const { displayedLines, isComplete } = useTerminalSequence(lines);
+  const DemoComponent = DEMO_MAP[project.slug];
+
+  return (
+    <div>
+      {displayedLines.map((line, i) => (
+        <p key={i} className="leading-relaxed">
+          {line.isCommand && (
+            <span className="text-terminal-green">$ </span>
+          )}
+          {i === 1 ? (
+            <span className="text-white">
+              {line.text.includes(project.tag) ? (
+                <>
+                  {line.text.split(project.tag)[0]}
+                  <span className={project.tagColor}>{project.tag}</span>
+                </>
+              ) : (
+                line.text
+              )}
+            </span>
+          ) : (
+            <span className="text-white">{line.text}</span>
+          )}
+          {line.isTyping && <span className="terminal-cursor">|</span>}
+        </p>
+      ))}
+
+      {isComplete && DemoComponent && (
+        <div className="mt-4 border-t border-white/10 pt-4 animate-fade-in">
+          <DemoComponent />
+        </div>
+      )}
+    </div>
+  );
+}
+
 function NormalProjectContent({ projectIndex }: { projectIndex: number }) {
   const project = projects[projectIndex];
 
-  const lines: TerminalLine[] = [
+  const lines: TerminalLine[] = useMemo(() => [
     { text: `cat projects/${project.slug}/readme.md`, isCommand: true, speed: 40 },
     { text: `${project.name}  ${project.tag}`, delay: 300, speed: 30 },
     { text: project.summary, delay: 200, speed: 15 },
-  ];
+  ], [project.slug, project.name, project.tag, project.summary]);
 
   const { displayedLines, isComplete } = useTerminalSequence(lines);
 
@@ -146,20 +225,16 @@ function NormalProjectContent({ projectIndex }: { projectIndex: number }) {
             <span className="text-terminal-green">$ </span>
           )}
           {i === 1 ? (
-            <>
-              <span className="text-white">
-                {/* Split out the tag portion and color it */}
-                {line.text.includes(project.tag) ? (
-                  <>
-                    {line.text.split(project.tag)[0]}
-                    <span className={project.tagColor}>{project.tag}</span>
-                    {line.text.split(project.tag).slice(1).join(project.tag)}
-                  </>
-                ) : (
-                  line.text
-                )}
-              </span>
-            </>
+            <span className="text-white">
+              {line.text.includes(project.tag) ? (
+                <>
+                  {line.text.split(project.tag)[0]}
+                  <span className={project.tagColor}>{project.tag}</span>
+                </>
+              ) : (
+                line.text
+              )}
+            </span>
           ) : (
             <span className="text-white">{line.text}</span>
           )}
@@ -167,14 +242,31 @@ function NormalProjectContent({ projectIndex }: { projectIndex: number }) {
         </p>
       ))}
 
+      {/* Screenshot preview */}
+      {isComplete && project.screenshot && (
+        <div className="mt-4 animate-fade-in">
+          <p className="text-white/30 text-xs mb-2 font-mono">// preview</p>
+          <div className="border border-white/10 overflow-hidden" style={{ maxWidth: 360 }}>
+            <Image
+              src={project.screenshot}
+              alt={`${project.name} preview`}
+              width={360}
+              height={200}
+              className="w-full h-auto"
+              sizes="360px"
+            />
+          </div>
+        </div>
+      )}
+
       {isComplete && (project.demoLink || project.githubLink) && (
-        <div className="flex gap-3 mt-4">
+        <div className="flex gap-3 mt-4 animate-fade-in">
           {project.demoLink && (
             <a
               href={project.demoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-sm border border-white/20 px-4 py-2 text-white/60 hover:border-white/40 hover:text-white/80 transition-colors"
+              className="font-mono text-sm border border-terminal-green/30 px-4 py-2 text-terminal-green hover:border-terminal-green/60 hover:text-terminal-green transition-colors"
             >
               [ view site ]
             </a>
@@ -210,8 +302,12 @@ export default function ProjectsContent() {
     <div>
       {/* Project content — key forces remount on index change */}
       <div key={currentProjectIndex}>
-        {project.isEasterEgg ? (
+        {project.isPlaceholder ? (
+          <PlaceholderContent />
+        ) : project.isEasterEgg ? (
           <EasterEggContent />
+        ) : project.isDemo ? (
+          <DemoProjectContent projectIndex={currentProjectIndex} />
         ) : (
           <NormalProjectContent projectIndex={currentProjectIndex} />
         )}
@@ -221,7 +317,7 @@ export default function ProjectsContent() {
       <div className="flex items-center gap-3 mt-6">
         <button
           onClick={goPrev}
-          className="font-mono text-sm border border-white/20 px-4 py-2 text-white/60 hover:border-white/40 hover:text-white/80 transition-colors"
+          className="font-mono text-sm border border-terminal-green/30 px-5 py-2 text-terminal-green/70 hover:border-terminal-green/60 hover:text-terminal-green transition-colors"
         >
           [ prev ]
         </button>
@@ -230,7 +326,7 @@ export default function ProjectsContent() {
         </span>
         <button
           onClick={goNext}
-          className="font-mono text-sm border border-white/20 px-4 py-2 text-white/60 hover:border-white/40 hover:text-white/80 transition-colors"
+          className="font-mono text-sm border border-terminal-green/30 px-5 py-2 text-terminal-green/70 hover:border-terminal-green/60 hover:text-terminal-green transition-colors"
         >
           [ next ]
         </button>

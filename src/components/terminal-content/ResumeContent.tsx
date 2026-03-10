@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import Image from "next/image";
 import {
   useTerminalSequence,
   type TerminalLine,
@@ -8,8 +8,6 @@ import {
 
 const resumeLines: TerminalLine[] = [
   { text: "cat resume.pdf", isCommand: true, speed: 50 },
-  { text: "", delay: 300 },
-  { text: "Resume preview loading...", speed: 30, delay: 200 },
 ];
 
 export default function ResumeContent() {
@@ -28,17 +26,22 @@ export default function ResumeContent() {
       ))}
 
       {isComplete && (
-        <div className="mt-6 space-y-4">
-          <div className="border border-white/10 min-h-[200px] flex items-center justify-center">
-            <span className="text-white/30 font-mono text-sm">
-              Resume preview — coming soon
-            </span>
+        <div className="mt-4 space-y-4 animate-fade-in">
+          <div className="border border-white/10 overflow-hidden" style={{ maxWidth: 400 }}>
+            <Image
+              src="/images/resume-preview.png"
+              alt="Andrew Robalino Garcia — Resume"
+              width={400}
+              height={518}
+              className="w-full h-auto"
+              sizes="400px"
+            />
           </div>
 
           <a
-            href="#"
-            className="inline-block font-mono text-sm border border-white/20 px-4 py-2 text-white/40 cursor-not-allowed opacity-50"
-            onClick={(e) => e.preventDefault()}
+            href="/Andrew_Robalino_Resume.pdf"
+            download
+            className="inline-block font-mono text-sm border border-terminal-green/30 px-4 py-2 text-terminal-green hover:border-terminal-green/60 transition-colors"
           >
             [ download resume ]
           </a>

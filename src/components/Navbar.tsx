@@ -18,19 +18,19 @@ const socials = [
   },
   {
     icon: Instagram,
-    href: "#",
+    href: "https://instagram.com/andrewrobalino",
     label: "Instagram",
   },
 ];
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-8 py-4 border-b border-white/10 bg-matte-black/80 backdrop-blur-sm">
-      <span className="font-sans text-sm tracking-widest uppercase text-white">
+    <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 md:px-8 py-3 md:py-4 border-b border-white/10 bg-matte-black/80 backdrop-blur-sm">
+      <span className="font-sans text-xs md:text-sm tracking-widest uppercase text-green-400">
         Andrew Robalino Garcia
       </span>
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-3 md:gap-5">
         {socials.map(({ icon: Icon, href, label }) => (
           <a
             key={label}

@@ -2,13 +2,14 @@ export interface Project {
   name: string;
   slug: string;
   tag: string;
-  tagColor: string; // tailwind text color class
+  tagColor: string;
   summary: string;
-  screenshot?: string; // path to screenshot image (placeholder for now)
+  screenshot?: string;
   demoLink?: string;
   githubLink?: string;
   isEasterEgg?: boolean;
   isDemo?: boolean;
+  isPlaceholder?: boolean;
 }
 
 export const projects: Project[] = [
@@ -18,8 +19,9 @@ export const projects: Project[] = [
     tag: "[LIVE]",
     tagColor: "text-terminal-green",
     summary:
-      "Fully responsive marketing site built with React and Tailwind CSS for a Miami-based tax & accounting firm. Features dynamic routing, animated UI components with Framer Motion, and a clean component architecture designed for scalability.",
-    demoLink: "#", // placeholder
+      "Solo-built a fully responsive marketing site with React and Tailwind CSS for a Miami-based tax & accounting firm. Designed and implemented dynamic routing, animated UI components with Framer Motion, and a clean component architecture designed for scalability.",
+    screenshot: "/images/miami-tandm.png",
+    demoLink: "https://miami-taxes.vercel.app",
     githubLink: "https://github.com/AndrewRobalino/Miami-TandM",
   },
   {
@@ -28,8 +30,9 @@ export const projects: Project[] = [
     tag: "[LIVE]",
     tagColor: "text-terminal-green",
     summary:
-      "Real-time drafting assistant for Brawl Stars competitive play, powered by custom datasets from World Finals. Built with React and Vite, featuring dynamic matchup analysis, filtered brawler recommendations, and a responsive data-driven UI.",
-    demoLink: "#", // placeholder
+      "Solo-built a real-time drafting assistant for Brawl Stars competitive play. Collected and structured custom datasets from World Finals, then built the frontend with React and Vite — featuring dynamic matchup analysis, filtered brawler recommendations, and a responsive data-driven UI.",
+    screenshot: "/images/draft-lab.png",
+    demoLink: "https://draft-lab-eight.vercel.app",
     githubLink: "https://github.com/AndrewRobalino/Draft-Lab",
   },
   {
@@ -37,7 +40,7 @@ export const projects: Project[] = [
     slug: "portfolio",
     tag: "[LIVE]",
     tagColor: "text-terminal-green",
-    summary: "", // not used — easter egg handles this
+    summary: "",
     isEasterEgg: true,
   },
   {
@@ -51,29 +54,36 @@ export const projects: Project[] = [
   {
     name: "8-Puzzle Solver",
     slug: "8-puzzle",
-    tag: "[LIVE TEST]",
+    tag: "[INTERACTIVE]",
     tagColor: "text-cyan-400",
     summary:
-      "An interactive solver for the classic 8-puzzle problem using search algorithms.",
+      "Built as a data structures project. Classic sliding tile puzzle with solvability validation. Click a tile next to the empty space to move it.",
     isDemo: true,
-    githubLink: "https://github.com/AndrewRobalino/AndrewRobalino", // placeholder
   },
   {
     name: "Restaurant Manager",
     slug: "restaurant-manager",
-    tag: "[LIVE TEST]",
+    tag: "[INTERACTIVE]",
     tagColor: "text-cyan-400",
     summary:
-      "A C-based system for managing restaurant orders and table assignments.",
+      "Built as an OOP project. Table management system with stateful seat tracking, menu ordering, and active table management.",
     isDemo: true,
   },
   {
     name: "Fuel Log Parser",
     slug: "fuel-log",
-    tag: "[LIVE TEST]",
+    tag: "[INTERACTIVE]",
     tagColor: "text-cyan-400",
     summary:
-      "A file parser that reads fuel log data and outputs formatted reports.",
+      "Built as a file I/O project. Enter fuel data and parse it into a formatted report with per-entry MPG, totals, and averages.",
     isDemo: true,
+  },
+  {
+    name: "More to come",
+    slug: "more",
+    tag: "...",
+    tagColor: "text-white/40",
+    summary: "",
+    isPlaceholder: true,
   },
 ];

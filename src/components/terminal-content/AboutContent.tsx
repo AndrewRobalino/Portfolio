@@ -2,9 +2,10 @@
 
 import { useTerminalSequence } from "@/hooks/useTerminalSequence";
 import { aboutLines } from "@/data/terminalContent";
+import AboutPhotos from "./AboutPhotos";
 
 export default function AboutContent() {
-  const { displayedLines } = useTerminalSequence(aboutLines);
+  const { displayedLines, isComplete } = useTerminalSequence(aboutLines);
 
   return (
     <div>
@@ -17,6 +18,7 @@ export default function AboutContent() {
           {line.isTyping && <span className="terminal-cursor">|</span>}
         </p>
       ))}
+      {isComplete && <AboutPhotos />}
     </div>
   );
 }

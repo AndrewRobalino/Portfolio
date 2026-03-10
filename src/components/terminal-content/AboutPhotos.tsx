@@ -1,30 +1,27 @@
 import Image from "next/image";
 
-export default function PhotoPanels() {
+export default function AboutPhotos() {
   return (
-    <div className="h-full w-full">
-      <div className="flex h-full w-full gap-3">
-        {/* Main photo — left, full height */}
+    <div className="mt-4 md:hidden">
+      <p className="text-white/30 text-xs mb-2 font-mono">// photos</p>
+      <div className="flex gap-2 h-48">
         <div className="relative flex-[0.5] overflow-hidden border-2 border-white">
           <Image
             src="/images/andrew-main.jpg"
             alt="Andrew on a city bridge"
             fill
             className="object-cover object-[60%_center]"
-            sizes="(min-width: 1024px) 20vw, 30vw"
-            priority
+            sizes="40vw"
           />
         </div>
-
-        {/* Right column — two stacked photos */}
-        <div className="flex flex-col gap-3 flex-[0.7]">
+        <div className="flex flex-col gap-2 flex-[0.5]">
           <div className="relative flex-1 overflow-hidden border-2 border-white">
             <Image
               src="/images/andrew-2.jpg"
               alt="Andrew on subway stairs"
               fill
               className="object-cover object-center"
-              sizes="(min-width: 1024px) 20vw, 30vw"
+              sizes="30vw"
             />
           </div>
           <div className="relative flex-1 overflow-hidden border-2 border-white">
@@ -33,7 +30,7 @@ export default function PhotoPanels() {
               alt="Andrew at torii gates"
               fill
               className="object-cover object-center saturate-[0.6] brightness-[0.9]"
-              sizes="(min-width: 1024px) 20vw, 30vw"
+              sizes="30vw"
             />
           </div>
         </div>

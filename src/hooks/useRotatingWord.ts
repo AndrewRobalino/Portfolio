@@ -1,40 +1,62 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface UseRotatingWordReturn {
-  currentWord: string;
-  currentIndex: number;
-  triggerNext: () => void;
+  displayedText: string;
+  isDeleting: boolean;
 }
 
+/**
+ * Types out a word, holds it, deletes it character by character, then types the next.
+ * All timeouts clean up properly — no memory leaks.
+ */
 export function useRotatingWord(
   words: string[],
-  interval: number = 6000
+  {
+    typeSpeed = 80,
+    deleteSpeed = 40,
+    holdDuration = 3000,
+    pauseBetween = 400,
+  } = {}
 ): UseRotatingWordReturn {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const startTimer = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % words.length);
-    }, interval);
-  }, [words.length, interval]);
-
-  const triggerNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % words.length);
-    startTimer(); // reset interval on external trigger
-  }, [words.length, startTimer]);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    startTimer();
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [startTimer]);
+    const word = words[wordIndex];
 
-  return {
-    currentWord: words[currentIndex],
-    currentIndex,
-    triggerNext,
-  };
+    if (!isDeleting) {
+      // Typing phase
+      if (displayedText.length < word.length) {
+        timeoutRef.current = setTimeout(() => {
+          setDisplayedText(word.slice(0, displayedText.length + 1));
+        }, typeSpeed);
+      } else {
+        // Fully typed — hold, then start deleting
+        timeoutRef.current = setTimeout(() => {
+          setIsDeleting(true);
+        }, holdDuration);
+      }
+    } else {
+      // Deleting phase
+      if (displayedText.length > 0) {
+        timeoutRef.current = setTimeout(() => {
+          setDisplayedText(displayedText.slice(0, -1));
+        }, deleteSpeed);
+      } else {
+        // Fully deleted — pause, then move to next word
+        timeoutRef.current = setTimeout(() => {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % words.length);
+        }, pauseBetween);
+      }
+    }
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [displayedText, isDeleting, wordIndex, words, typeSpeed, deleteSpeed, holdDuration, pauseBetween]);
+
+  return { displayedText, isDeleting };
 }
