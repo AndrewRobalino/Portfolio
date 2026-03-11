@@ -27,20 +27,22 @@ export default function ResumeContent() {
 
       {isComplete && (
         <div className="mt-4 space-y-4 animate-fade-in">
-          <div className="border border-white/10 overflow-hidden" style={{ maxWidth: 400 }}>
+          <div className="border border-white/10 overflow-hidden max-w-full sm:max-w-[400px]">
             <Image
               src="/images/resume-preview.png"
               alt="Andrew Robalino Garcia — Resume"
               width={400}
               height={518}
               className="w-full h-auto"
-              sizes="400px"
+              sizes="(max-width: 640px) 100vw, 400px"
             />
           </div>
 
           <a
             href="/Andrew_Robalino_Resume.pdf"
-            download
+            download="Andrew_Robalino_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block font-mono text-sm border border-terminal-green/30 px-4 py-2 text-terminal-green hover:border-terminal-green/60 transition-colors"
           >
             [ download resume ]
