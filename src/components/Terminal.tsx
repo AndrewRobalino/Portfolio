@@ -111,12 +111,12 @@ export default function Terminal() {
 
         {/* Neofetch-style hero — always visible */}
         {showIntroContent && (
-          <div className="flex flex-row items-stretch gap-3 md:gap-8 mt-4">
+          <div className="flex flex-row items-stretch gap-2 min-[430px]:gap-3 md:gap-8 mt-4">
             {/* ASCII art — vertical A/R/G stacked on mobile, justified to match right side height */}
             <div className="flex flex-col justify-between shrink-0 desktop:hidden">
-              <pre className="text-terminal-green text-[0.5rem] leading-[0.6rem] select-none">{ASCII_A}</pre>
-              <pre className="text-terminal-green text-[0.5rem] leading-[0.6rem] select-none">{ASCII_R}</pre>
-              <pre className="text-terminal-green text-[0.5rem] leading-[0.6rem] select-none">{ASCII_G}</pre>
+              <pre className="text-terminal-green text-[0.35rem] leading-[0.45rem] min-[430px]:text-[0.5rem] min-[430px]:leading-[0.6rem] select-none">{ASCII_A}</pre>
+              <pre className="text-terminal-green text-[0.35rem] leading-[0.45rem] min-[430px]:text-[0.5rem] min-[430px]:leading-[0.6rem] select-none">{ASCII_R}</pre>
+              <pre className="text-terminal-green text-[0.35rem] leading-[0.45rem] min-[430px]:text-[0.5rem] min-[430px]:leading-[0.6rem] select-none">{ASCII_G}</pre>
             </div>
             <pre className="text-terminal-green text-[1.6rem] leading-tight select-none shrink-0 hidden desktop:block">
               {ASCII_ARG}
@@ -124,16 +124,16 @@ export default function Terminal() {
 
             {/* Info — always beside ASCII */}
             <div className="flex flex-col justify-center min-w-0 pt-0 md:pt-2">
-              <h1 className="text-[1.05rem] desktop:text-[1.7rem] font-bold tracking-wide whitespace-nowrap">
+              <h1 className="text-[0.85rem] min-[430px]:text-[1.05rem] desktop:text-[1.7rem] font-bold tracking-wide whitespace-nowrap">
                 <span className="text-white">Hi, I&apos;m </span>
                 <span className="text-terminal-green underline underline-offset-4 decoration-terminal-green/40">Andrew Robalino Garcia</span>
               </h1>
-              <p className="text-base desktop:text-[1.6rem] mt-1 mb-3 desktop:mb-4">
+              <p className="text-sm min-[430px]:text-base desktop:text-[1.6rem] mt-1 mb-2 desktop:mb-4">
                 <span className="text-white">I&apos;m a </span>
                 <span className="text-terminal-green font-semibold">{displayedText}</span>
                 <span className="terminal-cursor-thick">█</span>
               </p>
-              <div className="grid grid-cols-2 gap-x-5 gap-y-0.5 text-xs">
+              <div className="grid grid-cols-1 min-[430px]:grid-cols-2 gap-x-4 gap-y-0.5 text-[0.65rem] min-[430px]:text-xs">
                 {[
                   ["OS", "Portfolio v1.0"],
                   ["Host", "Miami, FL"],
