@@ -51,24 +51,28 @@ const ASCII_ARG = `
  ██║  ██║██║  ██║╚██████╔╝
  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝`;
 
-const ASCII_ARG_MOBILE = `
- █████╗
-██╔══██╗
-███████║
-██╔══██║
-╚═╝ ╚═╝
+const ASCII_A = `\
+ ██████╗
+██╔════██╗
+█████████║
+██╔════██║
+╚═╝   ╚═╝`;
+
+const ASCII_R = `\
 ██████╗
 ██╔══██╗
 ██████╔╝
 ██╔══██╗
 ██║  ██║
-╚═╝  ╚═╝
- ██████╗
-██╔════╝
-██║ ███╗
-██║  ██║
-╚██████╔╝
- ╚═════╝`;
+╚═╝  ╚═╝`;
+
+const ASCII_G = `\
+ ███████╗
+██╔═════╝
+██║  ████╗
+██║   ██║
+╚███████╔╝
+ ╚══════╝`;
 
 export default function Terminal() {
   const [activeSection, setActiveSection] = useState<Section>("intro");
@@ -106,11 +110,13 @@ export default function Terminal() {
 
         {/* Neofetch-style hero — always visible */}
         {showIntroContent && (
-          <div className="flex flex-row items-start gap-3 sm:gap-4 md:gap-8 mt-4">
-            {/* ASCII art — vertical stacked on mobile/landscape, full on desktop */}
-            <pre className="text-terminal-green text-[0.35rem] leading-[0.4rem] select-none shrink-0 desktop:hidden">
-              {ASCII_ARG_MOBILE}
-            </pre>
+          <div className="flex flex-row items-stretch gap-3 md:gap-8 mt-4">
+            {/* ASCII art — vertical A/R/G stacked on mobile, justified to match right side height */}
+            <div className="flex flex-col justify-between shrink-0 desktop:hidden">
+              <pre className="text-terminal-green text-[0.4rem] leading-[0.5rem] select-none">{ASCII_A}</pre>
+              <pre className="text-terminal-green text-[0.4rem] leading-[0.5rem] select-none">{ASCII_R}</pre>
+              <pre className="text-terminal-green text-[0.4rem] leading-[0.5rem] select-none">{ASCII_G}</pre>
+            </div>
             <pre className="text-terminal-green text-[1.6rem] leading-tight select-none shrink-0 hidden desktop:block">
               {ASCII_ARG}
             </pre>
