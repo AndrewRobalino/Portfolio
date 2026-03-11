@@ -114,9 +114,9 @@ export default function Terminal() {
           <div className="flex flex-row items-stretch gap-2 min-[430px]:gap-3 md:gap-8 mt-4">
             {/* ASCII art — vertical A/R/G stacked on mobile, justified to match right side height */}
             <div className="flex flex-col justify-between shrink-0 desktop:hidden">
-              <pre className="text-terminal-green text-[0.45rem] leading-[0.55rem] min-[430px]:text-[0.6rem] min-[430px]:leading-[0.7rem] select-none">{ASCII_A}</pre>
-              <pre className="text-terminal-green text-[0.45rem] leading-[0.55rem] min-[430px]:text-[0.6rem] min-[430px]:leading-[0.7rem] select-none">{ASCII_R}</pre>
-              <pre className="text-terminal-green text-[0.45rem] leading-[0.55rem] min-[430px]:text-[0.6rem] min-[430px]:leading-[0.7rem] select-none">{ASCII_G}</pre>
+              <pre className="text-terminal-green text-[0.45rem] leading-[0.55rem] min-[430px]:text-[0.5rem] min-[430px]:leading-[0.6rem] select-none">{ASCII_A}</pre>
+              <pre className="text-terminal-green text-[0.45rem] leading-[0.55rem] min-[430px]:text-[0.5rem] min-[430px]:leading-[0.6rem] select-none">{ASCII_R}</pre>
+              <pre className="text-terminal-green text-[0.45rem] leading-[0.55rem] min-[430px]:text-[0.5rem] min-[430px]:leading-[0.6rem] select-none">{ASCII_G}</pre>
             </div>
             <pre className="text-terminal-green text-[1.6rem] leading-tight select-none shrink-0 hidden desktop:block">
               {ASCII_ARG}
@@ -166,7 +166,7 @@ export default function Terminal() {
               <button
                 key={item.section}
                 onClick={() => setActiveSection(item.section)}
-                className={`font-mono text-[0.5rem] min-[430px]:text-[0.6rem] md:text-sm border px-1.5 py-1 min-[430px]:px-2.5 min-[430px]:py-1.5 md:px-4 md:py-2 whitespace-nowrap transition-all duration-200 ${
+                className={`font-mono text-[0.55rem] min-[430px]:text-[0.6rem] md:text-sm border px-1.5 py-1 min-[430px]:px-2.5 min-[430px]:py-1.5 md:px-4 md:py-2 whitespace-nowrap transition-all duration-200 ${
                   activeSection === item.section
                     ? "border-terminal-green-muted text-terminal-green-muted shadow-[0_0_10px_rgba(52,211,153,0.2)]"
                     : "border-terminal-green-muted/30 text-terminal-green-muted/70 hover:border-terminal-green-muted/60 hover:text-terminal-green-muted hover:shadow-[0_0_8px_rgba(52,211,153,0.15)]"
