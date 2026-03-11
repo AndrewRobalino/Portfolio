@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {/* Desktop layout */}
-      <div className="relative hidden md:flex h-[calc(100vh-64px)] mt-16">
+      {/* Desktop layout — requires both width and height to avoid landscape phone issues */}
+      <div className="relative hidden desktop:flex h-[calc(100vh-64px)] mt-16">
         <motion.div
           className="flex w-[60%] flex-col p-6"
           initial={{ opacity: 0, x: -40 }}
@@ -35,8 +35,8 @@ export default function Home() {
         </motion.div>
       </div>
 
-      {/* Mobile layout */}
-      <div className="flex flex-col md:hidden mt-16">
+      {/* Mobile layout — also used for landscape phones */}
+      <div className="flex flex-col desktop:hidden mt-16">
         <motion.div
           className="flex flex-col p-4"
           initial={{ opacity: 0, y: 20 }}

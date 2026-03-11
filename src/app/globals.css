@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant desktop (@media (min-width: 768px) and (min-height: 500px));
+
 @theme inline {
   --color-matte-black: #0a0a0a;
   --color-terminal-green: #4ade80;
@@ -19,7 +21,7 @@ body {
   color: #ffffff;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (min-height: 500px) {
   html,
   body {
     overflow: hidden;

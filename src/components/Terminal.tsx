@@ -52,12 +52,12 @@ const ASCII_ARG = `
  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝`;
 
 const ASCII_ARG_MOBILE = `
- ██╗ ██████╗  ██████╗
- ██║ ██╔══██╗██╔════╝
- ██║ ██████╔╝██║ ███╗
- ██║ ██╔══██╗██║  ██║
- ██║ ██║  ██║╚█████╔╝
- ╚═╝ ╚═╝  ╚═╝ ╚════╝`;
+█████╗
+██╔═██╗
+█████╔╝
+██╔═██╗
+██║ ██║
+╚═╝ ╚═╝`;
 
 export default function Terminal() {
   const [activeSection, setActiveSection] = useState<Section>("intro");
@@ -79,9 +79,9 @@ export default function Terminal() {
   const showNav = isComplete;
 
   return (
-    <div className="flex flex-col h-auto min-h-[70vh] md:h-full border border-white overflow-hidden bg-matte-black shadow-[0_0_40px_rgba(255,255,255,0.06),0_8px_32px_rgba(0,0,0,0.8)]">
+    <div className="flex flex-col h-auto min-h-[70vh] desktop:h-full border border-white overflow-hidden bg-matte-black shadow-[0_0_40px_rgba(255,255,255,0.06),0_8px_32px_rgba(0,0,0,0.8)]">
       <TerminalTitleBar />
-      <div ref={terminalBodyRef} className="flex-1 bg-matte-black p-4 md:p-6 font-mono overflow-y-visible md:overflow-y-auto terminal-scrollbar">
+      <div ref={terminalBodyRef} className="flex-1 bg-matte-black p-4 md:p-6 font-mono overflow-y-visible desktop:overflow-y-auto terminal-scrollbar">
         {/* Intro command typing */}
         {displayedLines.map((line, i) => (
           <p key={i} className="leading-relaxed text-sm">
@@ -95,17 +95,17 @@ export default function Terminal() {
 
         {/* Neofetch-style hero — always visible */}
         {showIntroContent && (
-          <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8 mt-4">
+          <div className="flex flex-row items-start gap-3 sm:gap-4 md:gap-8 mt-4">
             {/* ASCII art — compact on mobile, full on sm+ */}
-            <pre className="text-terminal-green text-[0.55rem] leading-tight select-none shrink-0 sm:hidden">
+            <pre className="text-terminal-green text-[0.5rem] leading-tight select-none shrink-0 sm:hidden">
               {ASCII_ARG_MOBILE}
             </pre>
             <pre className="text-terminal-green text-lg md:text-[1.6rem] leading-tight select-none shrink-0 hidden sm:block">
               {ASCII_ARG}
             </pre>
 
-            {/* Info — right side on desktop, below on mobile */}
-            <div className="flex flex-col justify-center pt-0 md:pt-2 md:pl-4">
+            {/* Info — always beside ASCII */}
+            <div className="flex flex-col justify-center min-w-0 pt-0 md:pt-2">
               <h1 className="text-[1.05rem] sm:text-2xl md:text-[1.7rem] font-bold tracking-wide whitespace-nowrap">
                 <span className="text-white">Hi, I&apos;m </span>
                 <span className="text-terminal-green underline underline-offset-4 decoration-terminal-green/40">Andrew Robalino Garcia</span>
