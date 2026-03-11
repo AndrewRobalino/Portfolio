@@ -52,12 +52,23 @@ const ASCII_ARG = `
  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝`;
 
 const ASCII_ARG_MOBILE = `
-█████╗
-██╔═██╗
-█████╔╝
-██╔═██╗
-██║ ██║
-╚═╝ ╚═╝`;
+ █████╗
+██╔══██╗
+███████║
+██╔══██║
+╚═╝ ╚═╝
+██████╗
+██╔══██╗
+██████╔╝
+██╔══██╗
+██║  ██║
+╚═╝  ╚═╝
+ ██████╗
+██╔════╝
+██║ ███╗
+██║  ██║
+╚██████╔╝
+ ╚═════╝`;
 
 export default function Terminal() {
   const [activeSection, setActiveSection] = useState<Section>("intro");
@@ -96,26 +107,26 @@ export default function Terminal() {
         {/* Neofetch-style hero — always visible */}
         {showIntroContent && (
           <div className="flex flex-row items-start gap-3 sm:gap-4 md:gap-8 mt-4">
-            {/* ASCII art — compact on mobile, full on sm+ */}
-            <pre className="text-terminal-green text-[0.5rem] leading-tight select-none shrink-0 sm:hidden">
+            {/* ASCII art — vertical stacked on mobile/landscape, full on desktop */}
+            <pre className="text-terminal-green text-[0.35rem] leading-[0.4rem] select-none shrink-0 desktop:hidden">
               {ASCII_ARG_MOBILE}
             </pre>
-            <pre className="text-terminal-green text-lg md:text-[1.6rem] leading-tight select-none shrink-0 hidden sm:block">
+            <pre className="text-terminal-green text-[1.6rem] leading-tight select-none shrink-0 hidden desktop:block">
               {ASCII_ARG}
             </pre>
 
             {/* Info — always beside ASCII */}
             <div className="flex flex-col justify-center min-w-0 pt-0 md:pt-2">
-              <h1 className="text-[1.05rem] sm:text-2xl md:text-[1.7rem] font-bold tracking-wide whitespace-nowrap">
+              <h1 className="text-[1.05rem] desktop:text-[1.7rem] font-bold tracking-wide whitespace-nowrap">
                 <span className="text-white">Hi, I&apos;m </span>
                 <span className="text-terminal-green underline underline-offset-4 decoration-terminal-green/40">Andrew Robalino Garcia</span>
               </h1>
-              <p className="text-lg sm:text-xl md:text-[1.6rem] mt-1 mb-3 md:mb-4">
+              <p className="text-base desktop:text-[1.6rem] mt-1 mb-3 desktop:mb-4">
                 <span className="text-white">I&apos;m a </span>
                 <span className="text-terminal-green font-semibold">{displayedText}</span>
                 <span className="terminal-cursor-thick">█</span>
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-0.5 text-xs">
+              <div className="grid grid-cols-2 gap-x-5 gap-y-0.5 text-xs">
                 {[
                   ["OS", "Portfolio v1.0"],
                   ["Host", "Miami, FL"],
