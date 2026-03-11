@@ -133,7 +133,7 @@ export default function Terminal() {
                 <span className="text-terminal-green font-semibold">{displayedText}</span>
                 <span className="terminal-cursor-thick">█</span>
               </p>
-              <div className="grid grid-cols-1 min-[430px]:grid-cols-2 gap-x-4 gap-y-0.5 text-[0.65rem] min-[430px]:text-xs">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-[0.65rem] min-[430px]:text-xs">
                 {[
                   ["OS", "Portfolio v1.0"],
                   ["Host", "Miami, FL"],
@@ -157,7 +157,7 @@ export default function Terminal() {
         {/* Nav buttons — centered below intro content */}
         {showNav && (
           <motion.div
-            className="flex gap-1 min-[430px]:gap-1.5 sm:gap-2 md:gap-3 justify-center mt-2"
+            className="flex gap-2 md:gap-3 justify-center desktop:justify-center mt-2 w-full desktop:w-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
@@ -166,7 +166,7 @@ export default function Terminal() {
               <button
                 key={item.section}
                 onClick={() => setActiveSection(item.section)}
-                className={`font-mono text-[0.5rem] min-[430px]:text-[0.65rem] sm:text-xs md:text-sm border px-1 py-0.5 min-[430px]:px-1.5 min-[430px]:py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 whitespace-nowrap transition-all duration-200 ${
+                className={`font-mono text-[0.6rem] min-[430px]:text-[0.65rem] md:text-sm border px-2 py-1.5 md:px-4 md:py-2 whitespace-nowrap flex-1 desktop:flex-none transition-all duration-200 ${
                   activeSection === item.section
                     ? "border-terminal-green-muted text-terminal-green-muted shadow-[0_0_10px_rgba(52,211,153,0.2)]"
                     : "border-terminal-green-muted/30 text-terminal-green-muted/70 hover:border-terminal-green-muted/60 hover:text-terminal-green-muted hover:shadow-[0_0_8px_rgba(52,211,153,0.15)]"
