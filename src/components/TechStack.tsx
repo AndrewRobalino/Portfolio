@@ -2,8 +2,10 @@ export default function TechStack() {
   const categories = [
     { name: "languages/", items: ["JavaScript", "TypeScript", "Python", "Java"] },
     { name: "frontend/", items: ["React", "Next.js", "Vite", "Tailwind CSS", "Framer Motion", "HTML/CSS"] },
-    { name: "tools/", items: ["Git", "GitHub", "Node.js", "Vercel", "Figma", "VS Code"] },
-    { name: "learning/", items: ["PostgreSQL", "Docker", "AWS"] },
+    { name: "backend/", items: ["FastAPI", "PostgreSQL", "Redis", "Docker", "Node.js"] },
+    { name: "ai-tools/", items: ["Claude Code", "Gemini API", "Claude API", "OpenAI API"] },
+    { name: "tools/", items: ["Git", "GitHub", "Vercel", "Figma", "VS Code"] },
+    { name: "learning/", items: ["AWS", "Kubernetes"] },
   ];
 
   return (
