@@ -14,17 +14,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: "Miami-TandM",
-    slug: "miami-tandm",
-    tag: "[LIVE]",
-    tagColor: "text-terminal-green",
-    summary:
-      "Solo-built a fully responsive marketing site with React and Tailwind CSS for a Miami-based tax & accounting firm. Designed and implemented dynamic routing, animated UI components with Framer Motion, and a clean component architecture designed for scalability.",
-    screenshot: "/images/miami-tandm.png",
-    demoLink: "https://miami-taxes.vercel.app",
-    githubLink: "https://github.com/AndrewRobalino/Miami-TandM",
-  },
-  {
     name: "DocuMind",
     slug: "documind",
     tag: "[LIVE]",
@@ -34,6 +23,17 @@ export const projects: Project[] = [
     screenshot: "/images/documind.png",
     demoLink: "https://documind-phi.vercel.app",
     githubLink: "https://github.com/AndrewRobalino/DocuMind",
+  },
+  {
+    name: "Miami-TandM",
+    slug: "miami-tandm",
+    tag: "[LIVE]",
+    tagColor: "text-terminal-green",
+    summary:
+      "Solo-built a fully responsive marketing site with React and Tailwind CSS for a Miami-based tax & accounting firm. Designed and implemented dynamic routing, animated UI components with Framer Motion, and a clean component architecture designed for scalability.",
+    screenshot: "/images/miami-tandm.png",
+    demoLink: "https://miami-taxes.vercel.app",
+    githubLink: "https://github.com/AndrewRobalino/Miami-TandM",
   },
   {
     name: "Draft-Lab",
