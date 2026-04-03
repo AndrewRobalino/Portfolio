@@ -13,6 +13,7 @@ import {
   type TerminalLine,
 } from "@/hooks/useTerminalSequence";
 import { useRotatingWord } from "@/hooks/useRotatingWord";
+import { projects } from "@/data/projects";
 
 const IDENTITY_WORDS = [
   "Programmer",
@@ -138,10 +139,10 @@ export default function Terminal() {
                   ["OS", "Portfolio v1.0"],
                   ["Host", "Miami, FL"],
                   ["Kernel", "FIU Computer Science"],
-                  ["Uptime", "Dec 2026 (graduating)"],
+                  ["Uptime", "Summer 2026 (graduating)"],
                   ["Shell", "React 19 + Next.js"],
                   ["Theme", "Matte Black [terminal]"],
-                  ["Packages", "7 projects loaded"],
+                  ["Packages", `${projects.length} projects loaded`],
                   ["Status", "open to opportunities"],
                 ].map(([label, value]) => (
                   <p key={label}>
