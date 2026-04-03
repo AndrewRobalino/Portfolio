@@ -41,7 +41,7 @@ export const projects: Project[] = [
     tag: "[LIVE]",
     tagColor: "text-terminal-green",
     summary:
-      "Co-built a competitive drafting assistant for Brawl Stars esports. Scraped and analyzed 100+ BSC 2026 pro matches, built a 15-factor recommendation engine with range-aware scoring, hard counters, synergies, and map trait analysis. React + Vite frontend with live draft coaching, ban suggestions, and an AshBS-style meta tier list.",
+      "Co-built a competitive drafting assistant for Brawl Stars esports. Scraped and analyzed 100+ BSC 2026 pro matches, built a 15-factor recommendation engine with range-aware scoring, hard counters, synergies, and map trait analysis. React + Vite frontend with live draft coaching, ban suggestions, and a real-time meta tier list.",
     screenshot: "/images/draft-lab.png",
     demoLink: "https://brawl-draft-lab.vercel.app",
     githubLink: "https://github.com/AndrewRobalino/brawl-draft-lab",
