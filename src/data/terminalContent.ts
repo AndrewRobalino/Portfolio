@@ -10,7 +10,7 @@ export const aboutLines: TerminalLine[] = [
   },
   { text: "", delay: 100, speed: 10 },
   {
-    text: "I'm a Computer Science student at Florida International University, graduating Summer 2026. My focus is frontend development — I care deeply about design, user experience, and the details that separate functional from exceptional.",
+    text: "I'm a Computer Science student at Florida International University, graduating Summer 2026. My focus is shipping real products end-to-end — I've built everything from AI-powered platforms to competitive analysis tools. I care about clean architecture, great UX, and making things that actually work for real people.",
     delay: 100,
     speed: 15,
   },
